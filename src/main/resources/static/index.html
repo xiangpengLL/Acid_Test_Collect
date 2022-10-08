@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>核酸结果采集自动化</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.js"></script>
+</head>
+<body>
+<h1 align="center">核酸检测报告统计</h1>
+<div id="root" align="center">
+    待收集截屏人员信息：<input id="handExcel" type="text" placeholder="D:\desk\temp"><br>
+    统计结果存放位置：<input id="holdPosition" type="text" placeholder="D:\desk\temp"><br>
+    截屏保存位置：<input id="imgPosition" type="text" placeholder="D:\desk\temp"><br>
+    <button onclick="send()">提交</button>
+</div>
+<script type="text/javascript">
+    function send() {
+        var handExcel=$("#handExcel").val();
+        var holdPosition=$("#holdPosition").val();
+        var imgPosition=$("#imgPosition").val();
+        alert(holdPosition+"\n"+handExcel);
+        $.ajax({
+            url:"/process",
+            type:"POST",
+            dataType:"JSON",
+            data:{
+                handExcel:handExcel,
+                holdPosition:holdPosition,
+                imgPosition:imgPosition
+            },
+            success:function (json) {
+                alert("cg"+json);
+            },
+            error:function (xhr) {
+                alert("sb")
+            }
+        })
+    }
+</script>
+</body>
+</html>
